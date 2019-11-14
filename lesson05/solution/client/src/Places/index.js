@@ -7,7 +7,7 @@ import styles from "./places.module.css";
 import { useQuery } from "react-apollo";
 import { gql } from "apollo-boost";
 
-const placesQuery = gql`
+export const placesQuery = gql`
   {
     places {
       id

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "react-apollo";
 import { gql } from "apollo-boost";
+import { placesQuery } from "./Places";
 
 const addPlaceMutation = gql`
   mutation AddPlaceMutation($name: String!, $phone: String, $email: String) {
@@ -17,7 +18,14 @@ function AddForm(props) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [addPlace] = useMutation(addPlaceMutation);
+  const [addPlace] = useMutation(addPlaceMutation, {
+    refetchQueries: [
+      {
+        query: placesQuery
+      }
+    ],
+    awaitRefetchQueries: true
+  });
 
   return (
     <form
